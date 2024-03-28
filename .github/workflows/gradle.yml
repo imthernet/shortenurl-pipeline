@@ -66,6 +66,7 @@ jobs:
 
   dast_analysis:
     name: DAST analysis
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 17
