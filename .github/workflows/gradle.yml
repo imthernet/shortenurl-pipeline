@@ -21,8 +21,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        language: [ 'java-kotlin' ]
 
     steps:
     - name: Checkout repository
@@ -31,7 +29,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ matrix.language }}
+        languages: java-kotlin
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v3
@@ -39,7 +37,7 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:java-kotlin"
 
         
   build:
@@ -73,9 +71,9 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: app-jar
-          path: app.jar
+          path: app-jar
       - name: Start application
-        run: java -jar app.jar &
+        run: java -jar app-jar/wojtula-0.0.1-SNAPSHOT.jar &
       - name: Run DAST analysis
         uses: soos-io/soos-dast-github-action@v2
         with:
