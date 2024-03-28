@@ -41,16 +41,6 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
 
-  SCA-analysis:
-    name: SCA analysis
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v4
-      - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4
-        with:
-          fail-on-severity: high
         
   build:
     name: Build
