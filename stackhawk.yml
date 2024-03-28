@@ -10,7 +10,7 @@ app:
 
 # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
   openApiConf:
-    path: localhost:8080/v3/api-docs # OR...
+    path: /v3/api-docs # OR...
 #     filePath: openApi.json
   autoPolicy: true
   autoInputVectors: true
