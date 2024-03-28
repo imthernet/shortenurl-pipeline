@@ -61,7 +61,30 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+    - uses: actions/upload-artifact@master
+      with:
+        name: app-jar
+        path: build/libs/wojtula-0.0.1-SNAPSHOT-plain.jar
 
+  dast_analysis:
+    name: DAST analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: app-jar
+          path: app.jar
+      - name: Start application
+        run: java -jar app.jar &
+      - name: Run DAST analysis
+        uses: soos-io/soos-dast-github-action@v2
+        with:
+          client_id: jkn8nnike
+          api_key: NjkxNWE5ZDYtZDMyYy00MWYwLWJiYTYtNDAyZmYyMzk5YmNl
+          project_name: "shortenURL"
+          scan_mode: "baseline"
+          api_url: "https://api.soos.io/api/"
+          target_url: "http://127.0.0.1:8080/"
 
   dependency-submission:
     name: Dependecy submission
