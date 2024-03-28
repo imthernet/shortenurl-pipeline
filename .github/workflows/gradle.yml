@@ -68,6 +68,11 @@ jobs:
     name: DAST analysis
     runs-on: ubuntu-latest
     steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
       - uses: actions/download-artifact@master
         with:
           name: app-jar
