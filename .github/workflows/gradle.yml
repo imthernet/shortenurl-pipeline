@@ -79,15 +79,13 @@ jobs:
           path: app-jar
       - name: Start application
         run: java -jar app-jar/wojtula-0.0.1-SNAPSHOT.jar &
-      - name: Run DAST analysis
-        uses: soos-io/soos-dast-github-action@v2
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@4c3258cd62248dac6d9fe91dd8d45928c697dee0
+        continue-on-error: true
         with:
-          client_id: jkn8nnike
-          api_key: NjkxNWE5ZDYtZDMyYy00MWYwLWJiYTYtNDAyZmYyMzk5YmNl
-          project_name: "shortenURL"
-          scan_mode: "baseline"
-          api_url: "https://api.soos.io/api/"
-          target_url: "http://localhost:8080/"
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          codeScanningAlerts: true
+          githubToken: ${{ github.token }}
 
   dependency-submission:
     name: Dependecy submission
