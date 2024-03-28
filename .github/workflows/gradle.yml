@@ -10,8 +10,8 @@ jobs:
   SAST-analysis:
     name: SAST analysis
 
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
-    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
     permissions:
 
       security-events: write
@@ -64,7 +64,7 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: app-jar
-        path: build/libs/wojtula-0.0.1-SNAPSHOT-plain.jar
+        path: build/libs/wojtula-0.0.1-SNAPSHOT.jar
 
   dast_analysis:
     name: DAST analysis
